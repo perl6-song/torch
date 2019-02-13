@@ -1,5 +1,5 @@
 
-= Canoe
+= Torch
 
 An simple configuration manager tools for Perl 6 module.
 
