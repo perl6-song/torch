@@ -7,6 +7,83 @@ An simple configuration manager tools for Perl 6 module.
 
 == Reference
 
+=== Torch
+
+    `Torch` search the configuration file in given directory.
+
+* new(Str :$name!, IO :$path = &determind-local-path(), :$type = Torch::JSON)
++
+Create an instance of `Torch`.
+`$name` is the application name.
+`$path` is application configuration directory, default is `$*HOME.add('AppData/Local/')` (For Windows) or `$*HOME.add('.config/')` (For other system).
+`$type` is configuration type using for create configuration instance.
+
+* load(-\-> Promise)
+* load(Regex $r -\-> Promise)
++
+Return an `Promise` will kept with an `Array` contains all configuration instance.
+
+* Supply(-\-> Supply)
+* Supply(Regex $r -\-> Supply)
++
+Return an `Supply` will emit the configuration instance one by one.
+
+=== Torch::Config
+
+    `Torch::Config` represent an configuration file.
+
+* path(-\-> Str)
++
+Return the path of current application.
+
+* name(-\-> Str)
++
+Return current configuration file name.
+
+* config-name(-\-> Str)
++
+Return configuration file name without file extension.
+
+* Str(-\-> Str)
++
+Return the path of configuration file.
+
+* slurp(-\-> Str)
++
+Slurps and return the contents of the entire file.
+
+* spurt(Str $data -\-> Str)
++
+Write all the `$data` to the configuration file.
+
+* load() { ... }
++
+Read and return the configuration.
+
+* config() { ... }
++
+Return all the configuration.
+
+* save($data) { ... }
++
+Write configuration data `$data` to current configuration file.
+
+=== Torch::JSON does torch::Config
+
+    Default configuration format using JSON.
+
+* load() { ... }
++
+Read and return the configuration as JSON format.
+
+* config() { ... }
++
+Return all the configuration.
+
+* save($data) { ... }
++
+Write configuration data `$data` to current configuration file.
+
 == License
 
     The MIT License (MIT)
