@@ -7,13 +7,16 @@ role Config { ... }
 class JSON { ... }
 class Searcher { ... }
 
+# application configuration path
 has IO  $.path;
+# application name
 has Str $.name is required;
+# configuration type object
 has $.type;
-has %!config;
 has $!cs;
 
 submethod TWEAK() {
+    # current we using ~/AppData/Local/ on Windows, other os is ~/.config/
     sub determind-local-path() {
         given $*KERNEL {
             when /win32/ {
@@ -29,44 +32,32 @@ submethod TWEAK() {
     $!cs   = Searcher.new(name => $!name, path => $!path);
 }
 
-multi method load($config --> Promise) {
-    my $p  = Promise.new;
-    my $v  = $p.vow;
-
-    %!config = %{};
+multi method load(--> Promise) {
     start {
+        my @config;
         if $!cs.e {
-            my $s = supply {
-                whenever $!cs.search($config) {
-                    %!config{.config-name} = .self;
+            await supply {
+                whenever $!cs.search($!type) {
+                    @config.push(.self);
                 }
-            };
-            await $s;
-
+            }
         }
-        $v.keep($!cs.e);
+        @config
     }
-
-    return $p;
 }
 
-multi method load($config, Regex $r --> Promise) {
-    my $p  = Promise.new;
-    my $v  = $p.vow;
-
-    %!config = %{};
+multi method load(Regex $r --> Promise) {
     start {
+        my @config;
         if $!cs.e {
-            my $s = supply {
-                whenever $!cs.search($config, $r) {
-                    %!config{.config-name} = .self;
+            await supply {
+                whenever $!cs.search($!type, $r) {
+                    @config.push(.self);
                 }
-            };
-            await $s;
+            }
         }
-        $v.keep($!cs.e);
+        @config
     }
-    return $p;
 }
 
 multi method Supply(--> Supply) {
@@ -89,27 +80,26 @@ multi method Supply(Regex $r --> Supply) {
     }
 }
 
-method config() {
-    %!config;
-}
-
 role Config {
+    # configuration file path
     has $.path;
+    # configuration name
     has $.name;
 
-    method path() { $!path }
+    method path(--> Str) { $!path }
 
-    method name() { $!name }
+    method name(--> Str) { $!name }
 
-    method config-name() {
+    # configuration file name without file extension
+    method config-name(--> Str) {
         self.name.substr(0, self.name.rindex('.'));
     }
 
-    method Str() {
+    method Str(--> Str) {
         self.path() ~ '/' ~ self.name();
     }
 
-    method slurp() {
+    method slurp(--> Str) {
         self.Str().IO.slurp;
     }
 
