@@ -1,24 +1,23 @@
 {
     "perl"        : "6.*",
-    "name"        : "Canoe",
-    "version"     : "0.0.3",
+    "name"        : "Torch",
+    "version"     : "0.0.1",
     "license"     : "MIT",
-    "description" : "An simple thread-safe plug-in framework for Perl 6",
+    "description" : "An simple configuration manager tools for Perl 6 module.",
     "depends"     : [ ],
     "test-depends": [ ],
     "tags": [
-        "plug",
-        "plug-in",
-        "pluggable"
+        "configuration",
+        "config"
     ],
     "provides" : {
-        "Canoe" : "lib/Canoe.pm6"
+        "Torch" : "lib/Torch.pm6"
     },
 	"auth" : "github:araraloren",
     "authors" : "Loren",
-    "source-url"  : "https://github.com/perl6-song/canoe.git",
+    "source-url"  : "https://github.com/perl6-song/torch.git",
     "support" : {
-        "bugtracker" : "https://github.com/perl6-song/canoe/issues",
-        "source" : "https://github.com/perl6-song/canoe.git"
+        "bugtracker" : "https://github.com/perl6-song/torch/issues",
+        "source" : "https://github.com/perl6-song/torch.git"
     }
 }
