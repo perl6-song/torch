@@ -1,0 +1,4 @@
+{
+    "app": "torch",
+    "plugins": "plugins.json",
+}

@@ -1,7 +1,7 @@
 
 use Test;
-use Canoe;
+use Torch;
 
 plan 1;
 
-ok True, "Load Canoe ok!";
+ok True, "Load Torch ok!";
