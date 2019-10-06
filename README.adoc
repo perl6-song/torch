@@ -1,7 +1,7 @@
 
 = Torch
 
-An simple configuration manager tools for Perl 6 module.
+A simple configuration manager tools for Perl 6 module.
 
 == Description
 
