@@ -30,7 +30,7 @@ Return a `Supply` will emit the configuration instance one by one.
 
 === Torch::Config
 
-    `Torch::Config` represent an configuration file.
+    `Torch::Config` represents a configuration file.
 
 * path(-\-> Str)
 +
