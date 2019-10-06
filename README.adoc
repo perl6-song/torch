@@ -21,12 +21,12 @@ Create an instance of `Torch`.
 * load(-\-> Promise)
 * load(Regex $r -\-> Promise)
 +
-Return an `Promise` will kept with an `Array` contains all configuration instance.
+Return a `Promise` will kept with an `Array` contains all configuration instance.
 
 * Supply(-\-> Supply)
 * Supply(Regex $r -\-> Supply)
 +
-Return an `Supply` will emit the configuration instance one by one.
+Return a `Supply` will emit the configuration instance one by one.
 
 === Torch::Config
 
